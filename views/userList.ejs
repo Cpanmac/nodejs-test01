@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <title>后台</title>
+    <link rel="stylesheet" href="/assets/css/semantic.min.css">
+    <link rel="stylesheet" href="/assets/css/components/dropdown.min.css">
+    <link rel="stylesheet" href="/assets/css/components/dimmer.min.css">
+    <link rel="stylesheet" href="/assets/css/components/modal.min.css">
+    <link rel="stylesheet" href="/assets/css/components/popup.min.css">
+    <link rel="stylesheet" href="/assets/css/components/tab.min.css">
+    <link rel="stylesheet" href="/assets/libs/jquery-plugins/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/libs/requirejs/require.js"></script>
+    <script>require(["/app/config.js"], function() {
+      require(["ui-events"]);
+    })</script>
+</head>
+<body>
+<div class="ui inverted vertical segment">
+    <div class="ui inverted secondary menu">
+        <div class="ui dropdown item">
+            系统管理<i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <a href="/user/list" class="item">用户管理</a>
+            </div>
+        </div>
+        <div class="ui dropdown item right">
+            <%=userinfo.user_name%><i class="dropdown icon"></i>
+            <div class="menu transition hidden">
+                <a href="#" class="item">修改密码</a>
+                <a href="/logout" class="item">退出</a></div>
+        </div>
+    </div>
+</div>
+<div class="ui container">
+    <div class="html ui top aligned segment">
+        <div class="ui breadcrumb">
+            <a class="section">用户管理</a>
+            <i class="right chevron icon divider"></i>
+            <div class="active section">用户列表</div>
+        </div>
+    </div>
+    <div class="ui segment grid aligned small form">
+        <div class="ten wide column centered">
+            <div class="ui fluid action input">
+                <input type="text" id="userName" placeholder="用户名称">
+                <button id="queryBtn" class="ui primary button">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="ui grid aligned segment">
+        <div class="ten wide column centered">
+            <table class="ui grey compact celled striped selectable yellow table attached">
+                <thead>
+                <tr class="center aligned">
+                    <th>用户名</th><th>用户类型</th><th>邮箱</th><th>创建时间</th>
+                </tr>
+                </thead>
+                <tbody id="userList">
+                <% users.forEach(function(user){ %>
+                <tr class="center aligned">
+                    <td><%=user.user_name%></td>
+                    <td><% if (user.user_type == "1"){ %>
+                        <%="管理员"%>
+                        <% }else {%>
+                        <%="普通用户"%>
+                        <% } %>
+                    </td>
+                    <td><%=user.user_email || "暂无"%></td>
+                    <td><%=user.create_time || "暂无"%></td>
+                </tr>
+                <% }) %>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="4">
+                        <div id="addUserBtn" class="ui right floated small primary labeled icon button">
+                            添加用户<i class="user icon"></i>
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+                <div id="listLoader" class="ui inverted dimmer">
+                    <div class="ui loader"></div>
+                </div>
+                <div id="regUserModal" class="ui modal">
+                    <div class="header">添加用户</div><i class="close icon"></i>
+                    <div class="content">
+                        <div class="ui segment small attached form">
+                            <div class="field">
+                                <label>用户名称</label>
+                                <input type="text" id="userFullName" placeholder="用户名称">
+                            </div><div class="field">
+                                <label>邮箱</label>
+                                <input type="text" id="userEMail" placeholder="xxxx@email.com">
+                            </div><div class="field">
+                                <label>密码</label>
+                                <input type="password" id="userPassword" placeholder="请输入6位以上密码">
+                            </div>
+                            <div class="field">
+                                <label>用户类型</label>
+                                <div id="membersType" class="inline fields">
+                                    <div class="field"><div class="ui radio checkbox">
+                                            <input type="radio" name="member" checked="checked" value="2">
+                                            <label>管理员</label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input type="radio" name="member" value="3">
+                                            <label>普通用户</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <button id="confirmUserBtn" class="ui fluid primary button">确定</button>
+                            </div>
+                        </div>
+                        <div id="modalMsg" class="ui bottom attached hidden warning message">
+                            <i class="icon help"></i><span id="modalMsgTips">123</span>
+                        </div>
+                    </div>
+                </div>
+            </table>
+            <!--div.ui.bottom.attached.warning.message--><!--	i.circle.icon-->
+        </div>
+    </div>
+    <script>
+        require(["/app/config.js"], function () {
+            require(["/app/user/userList.js"]);
+        });
+    </script>
+</div>
+<div class="ui inverted vertical footer segment">
+
+</div>
+<div id="loadingLayer" style="display:none;" class="ui active dimmer">
+    <div class="ui text loader">
+
+    </div>
+</div>
+<div class="ui modal">
+    <div class="header">小提示</div>
+    <div class="content">
+        <p class="ui center aligned header">Message.</p>
+    </div>
+</div>
+</body>
+</html>
