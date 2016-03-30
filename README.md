@@ -6,5 +6,6 @@
 4.  使用express作为web应用的基础框架
 5.  使用orm进行数据库连接抽象
 6.  使用when优化异步回调写法
+7.  加入domain异常处理代码
 
 ###具体信息请查看 package.json的包
