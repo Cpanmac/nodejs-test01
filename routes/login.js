@@ -10,13 +10,13 @@ var router = express.Router();
 var isLogin = function(req, res, next) {
     var async = req.query.async || false;
 
-	if(!req.session || !req.session.user) {
+    if(!req.session || !req.session.user) {
         if(async)
             res.json({status: false, message: "未登录"});
         else
             res.redirect("/login");
     }else {
-    	next();
+        next();
     }
 }
 
@@ -39,15 +39,10 @@ var userIsLogin = function(req, res) {
  * @param res
  */
 var userLogin = function(req, res) {
-    console.log(req);
     var params = {
         name: req.body.username,
         password: req.body.password
     }
-    res.redirect("/index");
-    process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ' + err);
-    });
     var userModel = req.models.sys_user;
 
     userModel.getUserByParams(params).then(function(user) {

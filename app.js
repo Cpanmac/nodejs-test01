@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var log = require('./helper/logHelper');
 var options = {
   host: "127.0.0.1",
   port: 6379,
@@ -15,6 +16,8 @@ var options = {
 }
 var models = require('./model/index');
 var client = redis.createClient();
+//log4js记录日志
+log.use(app);
 //输出redis错误信息
 client.on("error", function(err) {
   console.log("Error" + err);

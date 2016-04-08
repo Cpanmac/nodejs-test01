@@ -6,7 +6,6 @@ define(["jquery"], function($) {
             addUser: "/user/add"
         }
     }
-
     var common = {
         getData: function(api, params, async, successCallback, errorCallback) {
             try{
