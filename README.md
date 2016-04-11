@@ -1,3 +1,36 @@
+#nodejs Web 服务运行流程图
+![nodejs Web 服务运行流程图](http://7xsfn1.com1.z0.glb.clouddn.com/Nodejs%E6%9E%84%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%B5%81%E7%A8%8B%E5%9B%BE.svg)
+##Node.js的应用场景
+####1) 适合
+
+&#160; &#160; &#160; &#160;JSON APIs——构建一个Rest/JSON API服务，Node.js可以充分发挥其非阻塞IO模型以及JavaScript对JSON的功能支持(如JSON.stringfy函数)
+单页面、多Ajax请求应用——如Gmail，前端有大量的异步请求，需要服务后端有极高的响应速度。<br>
+&#160; &#160; &#160; &#160;基于Node.js开发Unix命令行工具——Node.js可以大量生产子进程，并以流的方式输出，这使得它非常适合做Unix命令行工具
+流式数据——传统的Web应用，通常会将HTTP请求和响应看成是原子事件。而Node.js会充分利用流式数据这个特点，构建非常酷的应用。如实时文件上传系统transloadit
+准实时应用系统——如聊天系统、微博系统，但Javascript是有垃圾回收机制的，这就意味着，系统的响应时间是不平滑的(GC垃圾回收会导致系统这一时刻停止工作)。例如worktile就是基于nodejs开发的。
+#####2) 不适合
+
+&#160; &#160; &#160; &#160;nodejs是单线程的，不适合做复杂计算，适合用来做 IO 调度（高并发）。
+####3) 列举几个国内成功应用的项目
+
+1. [雪球](http://xueqiu.com/)
+
+2. [花瓣](http://huaban.com/ "title  花瓣网_发现、采集你喜欢的一切（家居，美食，时尚，穿搭，设计，商品，美图等）")
+
+3. [Worktile ](https://worktile.com/)
+
+
+##Node.js的优势和劣势
+
+####优点：
+1. 异步事件驱动，单进程线程，占用服务器资源少，高并发支持好，虽然单进程，但可以通过官方的 cluster 模块开启多个实例充分利用多核CPU的优势. 节约了服务器的资源，同时又能达到理想的状态。
+2. 入门简单，非常适合做 单页程序 + RESTfull API，Worktile就是采用Angular JS + Node.js实现的SPA，基本上完美配合。
+3. Node.js也非常适合动态网页web开发，虽然官方没有提供像Apache 和 Tomcat 这样的网页服务器和JSP这样的动态创建网页的技术，但是有很多优秀的第三方模块可以使用， 用 express mvc框架 加上你喜欢的模板引擎（ejs，jade，dot ），感觉还是很棒的。
+
+####缺点：
+1. 异步编程的缺点往往就是到处callback，代码不优雅，但是可以通过一些第三方的同步模式的模块进行弥补。
+2. 目前不适合做企业级应用开发，特别是复杂业务逻辑的，代码不好维护，事务支持不是很好，不过其生态圈更新速度很快，过不了多久会有大量企业使用。
+
 ##基于express框架的web后台管理系统
 ###一 、代码目录结构
 
@@ -334,8 +367,15 @@ promise.then(onFulfilled, onRejected)
 ****
 [nodejs异步控制「co、async、Q 、『es6原生promise』、then.js、bluebird」](https://www.zhihu.com/question/25413141 "「co、async、Q 、『es6原生promise』、then.js、bluebird」")
 
+###八 、自我总结
+1、	基于成熟的nodejs生态圈构建应用高效率、前后端统一使用JavaScript语言使得语言成本较低，如果web应用框架搭建成熟的话，其新人加入项目的门槛很低，JavaScript入门门槛很低。
+
+2、 nodejs目前没有java、.Net的成熟框架和开发规范，其web框架express、koa也处于快速成长期，公司开发规范目前都是基于java、.Net的，其大部分并不适用于JavaScript，大部分开发人员对JavaScript的认知只是处于jQuery的阶段，
+因此需要现在做一些基于nodejs的web学习，学习过程中可以提高对JavaScript、html等知识掌握和积累，以后java慢慢会变成业务中间件/接口服务，基于nodejs的前端会大力发展，尽早做其知识储备和能力提升。
+
+3、[入门教程--小白用户](http://course.tianmaying.com/node)  
 
 
+ ![nodejs应用图一](http://7xsfn1.com1.z0.glb.clouddn.com/nodejs%E5%BA%94%E7%94%A8.png)
 
-###nodejs Web 服务运行流程图
-![nodejs Web 服务运行流程图](http://7xsfn1.com1.z0.glb.clouddn.com/Nodejs%E6%9E%84%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%B5%81%E7%A8%8B%E5%9B%BE.svg)
+ ![nodejs应用图二](http://7xsfn1.com1.z0.glb.clouddn.com/JUP%20X.png)
