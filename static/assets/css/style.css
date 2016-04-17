@@ -45,3 +45,6 @@
 .regBtn {
     margin-top: 21px;
 }
+.loginBox section{
+    display: inline-block;
+}
